@@ -170,15 +170,15 @@ Planned work, in priority order. Status reflects the current state of the repo.
 | 7 | Engineering | pytest suite with mocked Azure clients, GitHub Actions CI (ruff, mypy, pytest) | Planned |
 | 8 | Deployment | Dockerfile, Azure Container Apps deployment, Bicep IaC, Azure Monitor tracing, live Streamlit demo | Planned |
 
-### Target metrics
+## Results
 
-These are **goals, not measured results**. They will be replaced with measured numbers from the benchmark as each item ships.
+Target numbers for each metric. The **Measured** column is filled in from the benchmark as each roadmap item ships.
 
-| Metric | Target |
-|--------|--------|
-| Violation detection F1 (30-video benchmark) | ≥ 0.75 |
-| Recall gain from retrieval vs. plain-LLM baseline | ≥ 12 points |
-| False-positive reduction from reviewer node | ≥ 20% |
-| End-to-end audit latency (short ad) | ≤ 5 min |
-| Cost per audit (short ad) | ≤ $0.20 |
-| Test coverage | ≥ 70% |
+| Metric | Target | Measured |
+|--------|--------|----------|
+| Violation detection F1 (30-video benchmark) | ≥ 0.75 | Pending |
+| Recall gain from retrieval vs. plain-LLM baseline | ≥ 12 points | Pending |
+| False-positive reduction from reviewer node | ≥ 20% | Pending |
+| End-to-end audit latency (short ad) | ≤ 5 min | Pending |
+| Cost per audit (short ad) | ≤ $0.20 | Pending |
+| Test coverage | ≥ 70% | Pending |
