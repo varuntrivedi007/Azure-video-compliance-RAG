@@ -148,8 +148,37 @@ Example response:
 }
 ```
 
-## Notes
+## Current limitations
 
 - Only YouTube URLs are supported right now.
 - Video Indexer processing is polled every 30 seconds, so an audit can take several minutes.
 - The `/audit` endpoint runs the workflow synchronously and blocks until the audit finishes.
+- The whole transcript is used as a single retrieval query, which can exceed the embedding model's input limit on long videos.
+
+## Roadmap
+
+Planned work, in priority order. Status reflects the current state of the repo.
+
+| # | Area | Work | Status |
+|---|------|------|--------|
+| 1 | Reliability | Structured LLM output (Pydantic) instead of regex JSON parsing; polling timeout; per-request temp files; configurable embedding deployment | Planned |
+| 2 | Retrieval | Chunk the transcript and run a search per chunk, then merge and dedupe retrieved rules (fixes long-video crashes) | Planned |
+| 3 | Output quality | Timestamped violations using Video Indexer time ranges, with citations to the exact rule and source document | Planned |
+| 4 | Evaluation | 30-video hand-labeled benchmark; precision/recall/F1 per violation category; plain-LLM (no retrieval) baseline | Planned |
+| 5 | Agent design | LangGraph reviewer node that re-checks CRITICAL findings before the final report | Planned |
+| 6 | API | Async job API: `POST /audit` returns a job ID, Video Indexer callbacks replace polling, `GET /audit/{id}` returns results | Planned |
+| 7 | Engineering | pytest suite with mocked Azure clients, GitHub Actions CI (ruff, mypy, pytest) | Planned |
+| 8 | Deployment | Dockerfile, Azure Container Apps deployment, Bicep IaC, Azure Monitor tracing, live Streamlit demo | Planned |
+
+### Target metrics
+
+These are **goals, not measured results**. They will be replaced with measured numbers from the benchmark as each item ships.
+
+| Metric | Target |
+|--------|--------|
+| Violation detection F1 (30-video benchmark) | ≥ 0.75 |
+| Recall gain from retrieval vs. plain-LLM baseline | ≥ 12 points |
+| False-positive reduction from reviewer node | ≥ 20% |
+| End-to-end audit latency (short ad) | ≤ 5 min |
+| Cost per audit (short ad) | ≤ $0.20 |
+| Test coverage | ≥ 70% |
